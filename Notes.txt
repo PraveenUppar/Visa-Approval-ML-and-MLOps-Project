@@ -1,0 +1,127 @@
+Project Overview:
+
+Problem Statement ??
+US Visa Approval Classification 
+
+Solution :
+Machine Learning -- Classification Algo
+Env -- Anaconda
+Flowchart -- Whimsical
+MLOps Tool -- Evident AI
+Deploy -- AWS 
+IDE -- VS code
+Storage -- MongoDB and AWS S3
+DataSet -- Kaggle 
+CI/CD -- Github Actions
+
+Load the data --> Perform EDA --> Feature Eng --> ML Algo --> Tuning --> Modelling
+
+:::::::::::::::::::::::::::::::::: MLOps STEPS ::::::::::::::::::::::::::::::::::::::::::
+
+1. Create a new Environment
+    Open Terminal: 
+        conda create -n visa python=3.8 -y
+        conda activate visa
+
+2. Create a template file which contains the file structure of the project
+
+3. Requirements.txt file will be created Add the needed requirements to the file
+    In Terminal: pip install -r requirements.txt
+
+4. Create a notebook folder and connect the Project to the MongoDB before that load the dataset to the project folder
+
+5. Set up the logger and exception files you can also check them with the demo.py file a logs folder will be created to store the output
+
+6. Utility --> main.utility --> The process/functions that will be used most we will store it here to access it in one place
+
+7. Notebook --> EDA and Feature Eng --> After Completing the EDA and Feature Eng -> a CatBoost Folder will be created which contains info about model performance
+
+8. Pipeline Flow == Data Ingestion --> Data Validation --> Data Transformation --> Model Training --> Model Evaluation
+
+9. Data Setup --> Connect to Mongodb database and fetch the data from the database
+    Check out the data Ingestion image from the Flowchart
+
+    Constants --> Entity --> Components --> Pipeline --> demo
+
+    Constants --> Create all the constants for the project
+    Entity --> Config_entity and Artifact_entity (Steps to do when the data has arrived)
+    Configuration --> Mongo_db_connection (To connect to MongoDB Database)
+    Data Access --> usvisa_data (Convert data into dataframe -- convert objects to data)
+
+    After the Data Ingestion Process two files will be created train ans test.csv which will used to load and train the model 
+    The Train and test files will be used by the next step that is Data Validation
+    The reason to make a constant folder is to store all the fixed variables for the project and make changes in a single file
+    
+    OVERALL THE FIRST PROCESS WE DID IT IN NOTEBOOK WE DID THE SAME BUT IN A CODED FORMATE RATHER THAN JUYPTER/COLAB
+
+    Components --> Data_ingestion
+    Pipeline --> Training_pipline
+
+    CHECK THE PIPELINE THROUGH DEMO.PY --> AFTER RUNNING ARTIFACT FOLDER WILL BE CREATED AND CONTAINS TEST AND TRAIN CSV FILES LOADED FORM THE DATABASE
+ 
+    Notebook --> Data_drift_demo --> Testing the code before implementing --> HTML File created that contains all the insights about the data
+
+    Config --> Schema.yaml (Instruction file that contains all the methods and algo to apply on the data)
+    Components --> Data_validation
+    Pipeline --> Training_pipline
+
+    CHECK THE PIPELINE THROUGH DEMO.PY --> AFTER RUNNING ARTIFACT FOLDER WILL BE CREATED AND CONTAINS DATA TRAIN AND TEST CSV FILES LOADED FORM THE DATABASE
+
+    Entity --> Estimator.py
+    Components --> Data Transformation
+    CHECK THE PIPELINE THROUGH DEMO.PY --> AFTER RUNNING ARTIFACT FOLDER WILL BE CREATED AND CONTAINS DATA Ingestion AND DATA Validation AND DATA Transformation FOLDERS
+
+10. AWS --> S3 --> Create a Bucket
+    AWS --> IAM --> Give S3 Access --> Search S3 --> Choose S3Full Access
+    IAM --> User --> Security --> Access Key --> Download file
+    Add both the Access ID and Access Key to the .env file
+
+    Configuration --> AWS_Connection file
+
+    Cloud Storage Folder --> AWS Storage file (Contains all the code that we can perform in the S3 like -- Get,Push etc)
+    Entity --> S3 Estimator file (To load the model + save the model + Load the train data)
+
+11. Components --> Model Evaluation + Model Pusher + Model Trainer
+    Pipeline --> Training Pipeline
+    Pipeline --> Prediction Pipeline (It will be connected to the FAST API)
+
+12. CHECK THE PIPELINE THROUGH DEMO.PY --> AFTER RUNNING MODEL WILL BE CREATED IN THE S3 BUCKET
+
+13. Create a templates folder --> html file
+
+14. app.py --> FAST API
+
+15. Create a static file  --> CSS
+
+Deployment
+
+16. AWS EC2 + AWS ECR + Git HUB Action
+
+17. ECR --> Create repo --> Copy URI
+
+18. Create a EC2 Machine --> Ubuntu
+
+Commands :
+    sudo apt-get update -y
+
+	sudo apt-get upgrade
+	
+	#required
+
+	curl -fsSL https://get.docker.com -o get-docker.sh
+
+	sudo sh get-docker.sh
+
+	sudo usermod -aG docker ubuntu
+
+	newgrp docker
+
+    To check --> docker --version
+
+19. Github Repo --> Settings --> Actions --> Runners --> Copy the command and paste it in EC2
+
+20. Github Repo --> Settings --> Secrets --> Actions --> Set up Github Secret Keys --> Access Key for the EC2 saved as pemp 
+
+21. Github folder --> Workflow folder --> aws.yaml
+
+22. Docker file
